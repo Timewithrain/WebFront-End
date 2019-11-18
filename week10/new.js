@@ -131,7 +131,7 @@ $(function(){
             var str = toremove[j].innerHTML;
             if(isBothDelete(str)){
                 var newApp = '<div class="app">'+str+'</div>';
-                $("#app-content")[0].append(newApp);
+                $("#app-content").append(newApp);
             }
         }
         var oriservers = $("#oriservers2");
@@ -142,7 +142,7 @@ $(function(){
             var str = toremove[j].innerHTML;
             if(isBothDelete(str)){
                 var newApp = '<div class="app">'+str+'</div>';
-                $("#app-content")[0].append(newApp);
+                $("#app-content").append(newApp);    
             }
         }
         
