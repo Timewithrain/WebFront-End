@@ -20,19 +20,13 @@ $(function(){
 
     $("#add").click(function(){
         // 获取选中的app的内容
-        var span = $(".app-choose > span")[0];
-        if(span != null){
-            var str = span.innerText;
-        }
-
+        var addapp = $(".app-choose")[0];
         var oriservers = $(".server-choose").next();
         //当服务和服务器都被选中时才进行添加
-        if( span!=null && oriservers.is("div")){
+        if( addapp!=null && oriservers.is("div")){
+            //获取添加服务的内容
+            var str = addapp.innerText;
             var first = oriservers.children("div");
-            // alert(first[0].innerHTML);
-            // alert(str)
-            // alert(first[0].innerHTML==str);
-            // alert(first.length);
             // 判断服务是否被添加
             var i = 0
             while(i<first.length){
@@ -42,9 +36,12 @@ $(function(){
                 }
                 i++;
             }
-
             var newApp = '<div class="app">'+str+'</div>';
             oriservers.append(newApp);
+            //当两个服务器都添加了同一个app时将左边的app删去
+            if(isBothAdd(str)){
+                $("#app-content")[0].removeChild(addapp);
+            }
         }else{
             // var newSpan = document.createElement("span");
             // newSpan.innerText = str;
@@ -52,36 +49,121 @@ $(function(){
         }
     });
 
+    // $("#add").click(function(){
+    //     // 获取选中的app的内容
+    //     var span = $(".app-choose")[0];
+    //     if(span != null){
+    //         var str = span.innerText;
+    //     }
+    //     var oriservers = $(".server-choose").next();
+    //     //当服务和服务器都被选中时才进行添加
+    //     if( span!=null && oriservers.is("div")){
+    //         var first = oriservers.children("div");
+    //         // 判断服务是否被添加
+    //         var i = 0
+    //         while(i<first.length){
+    //             if(first[i].innerHTML==str){
+    //                 alert("此服务已经被添加");
+    //                 return;
+    //             }
+    //             i++;
+    //         }
+    //         var newApp = '<div class="app">'+str+'</div>';
+    //         oriservers.append(newApp);
+            
+    //     }else{
+    //         // var newSpan = document.createElement("span");
+    //         // newSpan.innerText = str;
+    //         alert("没有选择服务或服务器");
+    //     }
+    // });
+
+    //两个服务器都添加了同一个服务则将左边的服务中的app删去
+    var isBothAdd = function(str){
+        // 获取所有已经添加的app
+        var apps = $(".oriservers").children(".app");
+        var isboth = false;
+        var count = 0;
+        var i = 0;
+        while(i<apps.length){
+            // 依次比较添加的app的内容是否有相同的
+            if(apps[i].innerHTML==str){
+                count++;
+            }
+            i++;
+        }
+        if(count>1){
+            isboth = true;
+        }
+        return isboth;
+    }
+
     $("#del").click(function(){
-        //删除每个oriserver中选中的服务
+        // //删除每个oriserver中选中的服务
         // var oriservers = $(".oriservers");
         // var i = 0;
         // while(i<oriservers.length){
-        //     alert(oriservers[i].innerHTML);
+        //     // alert(oriservers[i].innerHTML);
         //     var toremove = oriservers.children(".app-choose");
-        //     alert(toremove.length);
-        //     alert(oriservers.length+","+i);
+        //     // alert(toremove.length);
+        //     // alert(oriservers.length+","+i);
         //     var j = 0;
         //     while(j<toremove.length){
-        //         // alert(toremove[toremove.length-1].innerHTML);
-        //         oriservers[i].removeChild(toremove[j]);
+        //         alert(toremove[toremove.length-1].innerHTML);
+        //         //不能直接删除
+        //         var choose = oriservers[i].children(".app-choose");
+        //         alert(choose[0].innerHTML);
+        //         if(innerchoose!=null){
+        //             oriservers[i].removeChild(toremove[j]);
+        //         }
         //         j++;
         //         alert("oriservers "+i+"\r\ntoremove "+j);
         //     }
         //     alert("oriservers"+i);
         //     i++;
         // }
-        var oriservers = $(".oriservers");
+        //依次删除两个oriserver中的服务
+        var oriservers = $("#oriservers1");
         var toremove = oriservers.children(".app-choose");
         var j = 0;
         while(j<toremove.length){
-            // alert(toremove[toremove.length-1].innerHTML);
-            // oriservers[0].remo   veChild(toremove[j]);
-            oriservers[1].removeChild(toremove[j]);
-            j += 1;
-            alert(j);
+            oriservers[0].removeChild(toremove[j]);
+            var str = toremove[j].innerHTML;
+            if(isBothDelete(str)){
+                var newApp = '<div class="app">'+str+'</div>';
+                $("#app-content")[0].append(newApp);
+            }
+        }
+        var oriservers = $("#oriservers2");
+        var toremove = oriservers.children(".app-choose");
+        var j = 0;
+        while(j<toremove.length){
+            oriservers[0].removeChild(toremove[j]);
+            var str = toremove[j].innerHTML;
+            if(isBothDelete(str)){
+                var newApp = '<div class="app">'+str+'</div>';
+                $("#app-content")[0].append(newApp);
+            }
         }
         
     });
+
+    //判断app在两个oriserver中是否被彻底删除
+    var isBothDelete = function(str){
+        var isDelete = false;
+        var apps = $(".oriservers").children(".app");
+        var count = 0;
+        var i = 0;
+        while(i<apps.length){
+            if(apps[i].innerHTML==str){
+                count++;
+            }
+            i++;
+        }
+        if(count==0){
+            isDelete = true;
+        }
+        return isDelete;
+    }
 
 });

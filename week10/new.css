@@ -44,14 +44,13 @@
 
 /***********************center***************************/
 #center{
-    width: 1500px;
+    /* width: 1200px; */
     height: 500px;
     margin: 0 auto;
     margin-top: 20px;
 }
 
 #apps{
-    width: 550px;
     height: 480px;
     border-style: solid;
     border-width: 1px;
@@ -62,12 +61,11 @@
 
 #app-content{
     margin-top: 20px;
-    padding-left: 30px;
+    padding: 0px 30px;
 }
 
 .app{
-    
-    width: 490px;
+    width: 350px;
     border-style: solid;
     border-width: 1px;
     border-color: black;
@@ -76,17 +74,18 @@
 }
 
 #buttons{
-    width: 170px;
+    width: 120px;
     height: 480px;
     border-style: solid;
     border-width: 1px;
     border-color: black;
     float: left;
-    margin: 0 72px;
+    margin-left: 100px;;
+    /* margin: 0 auto; */
 }
 
 .button{
-    margin: 15px 25px;
+    margin: 0 auto;
     padding: 10px 5px;
     border-style: solid;
     border-width: 1px;
@@ -97,20 +96,29 @@
 
 .button a{
     color: black;
+    width: 50px;
+    font-size: 17px;
     text-decoration: none;
     margin: 0px 30px;
 }
 
 #add{
-    margin-top: 30px;
+    top: 10%;
+    width: 70px;
+    height: 40px;
+    margin: 0 auto;
+    position: relative;
 }
 
 #del{
-    margin-top: 70px;
+    top: 20%;
+    width: 70px;
+    height: 40px;
+    margin: 0 auto;
+    position: relative;
 }
 
 #servers{
-    width: 550px;
     height: 480px;
     border-style: solid;
     border-width: 1px;
@@ -119,8 +127,13 @@
     margin-right: 20px;
 }
 
+#server-content{
+    margin-top: 20px;
+    padding: 0px 30px;
+}
+
 .server{
-    margin: 20px;
+    width: 368px;
     border-style: solid;
     border-width: 1px;
     border-color: black;
@@ -142,6 +155,7 @@
 }
 
 .oriserver{
+    width: 350px;
     padding: 3px;
     border-style: solid;
     border-width: 1px;
