@@ -1,5 +1,43 @@
 $(function(){
     
+    $("#login-bnt").click(function(){
+        $("#login-dialog").dialog("open");
+    });
+
+    $("#login-dialog").dialog({
+        title: "用户登录",
+        width: 380,
+        hegiht: 240,
+        autoOpen: false,
+        buttons:{
+            登录:function(){
+                $("#login-dialog").dialog("close");
+            },
+            取消:function(){
+                $("#login-dialog").dialog("close");
+            }
+        }
+    });
+
+    $("#register-bnt").click(function(){
+        $("#register-dialog").dialog("open");
+    });
+
+    $("#register-dialog").dialog({
+        title: "用户注册",
+        width: 390,
+        hegiht: 260,
+        autoOpen: false,
+        buttons:{
+            注册:function(){
+                $("#register-dialog").dialog("close");
+            },
+            取消:function(){
+                $("#register-dialog").dialog("close");
+            }
+        }
+    });
+
     // 设置app被选中的效果,并且将其绑定在document上使后添加的app也能使用
     $(document).on("click",".app",function(){
         if($(this).hasClass("app-choose")){
@@ -49,35 +87,6 @@ $(function(){
         }
     });
 
-    // $("#add").click(function(){
-    //     // 获取选中的app的内容
-    //     var span = $(".app-choose")[0];
-    //     if(span != null){
-    //         var str = span.innerText;
-    //     }
-    //     var oriservers = $(".server-choose").next();
-    //     //当服务和服务器都被选中时才进行添加
-    //     if( span!=null && oriservers.is("div")){
-    //         var first = oriservers.children("div");
-    //         // 判断服务是否被添加
-    //         var i = 0
-    //         while(i<first.length){
-    //             if(first[i].innerHTML==str){
-    //                 alert("此服务已经被添加");
-    //                 return;
-    //             }
-    //             i++;
-    //         }
-    //         var newApp = '<div class="app">'+str+'</div>';
-    //         oriservers.append(newApp);
-            
-    //     }else{
-    //         // var newSpan = document.createElement("span");
-    //         // newSpan.innerText = str;
-    //         alert("没有选择服务或服务器");
-    //     }
-    // });
-
     //两个服务器都添加了同一个服务则将左边的服务中的app删去
     var isBothAdd = function(str){
         // 获取所有已经添加的app
@@ -99,29 +108,6 @@ $(function(){
     }
 
     $("#del").click(function(){
-        // //删除每个oriserver中选中的服务
-        // var oriservers = $(".oriservers");
-        // var i = 0;
-        // while(i<oriservers.length){
-        //     // alert(oriservers[i].innerHTML);
-        //     var toremove = oriservers.children(".app-choose");
-        //     // alert(toremove.length);
-        //     // alert(oriservers.length+","+i);
-        //     var j = 0;
-        //     while(j<toremove.length){
-        //         alert(toremove[toremove.length-1].innerHTML);
-        //         //不能直接删除
-        //         var choose = oriservers[i].children(".app-choose");
-        //         alert(choose[0].innerHTML);
-        //         if(innerchoose!=null){
-        //             oriservers[i].removeChild(toremove[j]);
-        //         }
-        //         j++;
-        //         alert("oriservers "+i+"\r\ntoremove "+j);
-        //     }
-        //     alert("oriservers"+i);
-        //     i++;
-        // }
         //依次删除两个oriserver中的服务
         var oriservers = $("#oriservers1");
         var toremove = oriservers.children(".app-choose");
